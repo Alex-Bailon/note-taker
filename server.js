@@ -39,7 +39,7 @@ app.post("/api/notes", function(req, res) {
 
 app.delete("/api/notes/:id",function(req, res) {
     var chosen = req.params.id;
-    console.log(req.params)
+    console.log(chosen)
 
     fs.readFile('./db/db.json', 'utf-8', function(error, data) {
         if (error) {
@@ -56,11 +56,10 @@ app.delete("/api/notes/:id",function(req, res) {
 
         fs.writeFile('./db/db.json', JSON.stringify(dataArray), function (err) {
             if (err) throw err;
-            console.log('Updated!');
+            console.log('Updated!'); 
           });
       });
 })
-
 
 app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
