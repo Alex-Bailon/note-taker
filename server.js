@@ -3,11 +3,11 @@ const path = require("path");
 const fs = require("fs");
 
 const app = express();
-let PORT = PORT = process.env.PORT || 3000;
+let PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.use(express.static('public'))
 
 app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "./public/index.html"));
@@ -39,7 +39,7 @@ app.post("/api/notes", function(req, res) {
 
 app.delete("/api/notes/:id",function(req, res) {
     var chosen = req.params.id;
-    console.log(chosen)
+    console.log(req.params)
 
     fs.readFile('./db/db.json', 'utf-8', function(error, data) {
         if (error) {
