@@ -31,7 +31,7 @@ app.post("/api/notes", function(req, res) {
         dataArray.push(newNote)
         fs.writeFile('./db/db.json', JSON.stringify(dataArray), function (err) {
             if (err) throw err;
-            console.log('Saved!');
+            return res.json(dataArray)
           });
       });
       
@@ -39,7 +39,6 @@ app.post("/api/notes", function(req, res) {
 
 app.delete("/api/notes/:id",function(req, res) {
     var chosen = req.params.id;
-    console.log(chosen)
 
     fs.readFile('./db/db.json', 'utf-8', function(error, data) {
         if (error) {
@@ -49,14 +48,13 @@ app.delete("/api/notes/:id",function(req, res) {
 
         for(let i = 0; i < dataArray.length; i++){
             if(dataArray[i].title == chosen){
-                console.log('splice')
                 dataArray.splice(i, 1)
             }
         }
 
         fs.writeFile('./db/db.json', JSON.stringify(dataArray), function (err) {
             if (err) throw err;
-            console.log('Updated!'); 
+            return res.json(dataArray)
           });
       });
 })

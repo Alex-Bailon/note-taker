@@ -74,7 +74,6 @@ var handleNoteDelete = function(event) {
   if (activeNote.title === note.title) {
     activeNote = {};
   }
-  console.log(note.title)
   deleteNote(note.title).then(function() {
     getAndRenderNotes();
     renderActiveNote();
